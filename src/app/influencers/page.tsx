@@ -87,6 +87,7 @@ export default function InfluencersPage() {
   const [nicheFilter, setNicheFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [sexFilter, setSexFilter] = useState("");
+  const [traitFilter, setTraitFilter] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [editing, setEditing] = useState<Influencer | null>(null);
 
@@ -110,6 +111,7 @@ export default function InfluencersPage() {
       if (nicheFilter && i.niche !== nicheFilter) return false;
       if (statusFilter && i.status !== statusFilter) return false;
       if (sexFilter && i.sex !== sexFilter) return false;
+      if (traitFilter && !i.traits?.split(",").includes(traitFilter)) return false;
       return true;
     });
   }, [influencers, search, platformFilter, nicheFilter, statusFilter, sexFilter]);
@@ -171,6 +173,10 @@ export default function InfluencersPage() {
         <select className="filter-select" value={sexFilter} onChange={(e) => setSexFilter(e.target.value)}>
           <option value="">All</option>
           {SEXES.map((s) => <option key={s} value={s}>{capitalize(s)}</option>)}
+        </select>
+        <select className="filter-select" value={traitFilter} onChange={(e) => setTraitFilter(e.target.value)}>
+          <option value="">All Traits</option>
+          {TRAITS.map(({ id, label }) => <option key={id} value={id}>{label}</option>)}
         </select>
         <select className="filter-select" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
           <option value="">All Statuses</option>
