@@ -25,6 +25,7 @@ npx prisma generate                     # Regenerate Prisma client after schema 
 - `Contact` — person, optionally linked to a `Company`
 - `Task` — to-do item with status (`OPEN | IN_PROGRESS | DONE`), priority (`LOW | MEDIUM | HIGH`), optional link to a Contact and/or Company
 - `Note` — free-text log entry, linked to a Contact or Company (cascade-deleted with parent)
+- `Influencer` — influencer profile with platform (`INSTAGRAM | TIKTOK | YOUTUBE | TWITTER | FACEBOOK | OTHER`), handle, followers, engagementRate, niche, traits (comma-separated string), ratePerPost, sex (`MALE | FEMALE`), city, phone, phone2, status (`ACTIVE | INACTIVE | BLACKLISTED`)
 
 **API routes** (`src/app/api/`):
 - `/api/contacts` — GET (with `?search=`), POST
@@ -35,7 +36,9 @@ npx prisma generate                     # Regenerate Prisma client after schema 
 - `/api/tasks/[id]` — PUT, DELETE
 - `/api/notes` — POST
 - `/api/notes/[id]` — DELETE
-- `/api/stats` — GET; returns `{ contacts, companies, tasks, openTasks }` counts for the dashboard
+- `/api/influencers` — GET (with `?search=`, `?platform=`, `?niche=`, `?status=`, `?sex=`), POST
+- `/api/influencers/[id]` — GET, PUT, DELETE
+- `/api/stats` — GET; returns `{ contacts, companies, tasks, openTasks, influencers }` counts for the dashboard
 
 **UI pages** (`src/app/`):
 - `/` — Dashboard with stat tiles
@@ -44,11 +47,15 @@ npx prisma generate                     # Regenerate Prisma client after schema 
 - `/companies` — Searchable table, inline create modal
 - `/companies/[id]` — Detail view same as contact detail
 - `/tasks` — Filterable task list with status toggle and inline edit
+- `/influencers` — Filterable table (platform, niche, sex, status, trait), inline create/edit modals; click name to edit
 
 **Shared components** (`src/components/`):
 - `Sidebar` — persistent left nav (client component, uses `usePathname`)
 - `Modal` — backdrop modal with Escape-to-close
 - `ContactForm`, `CompanyForm`, `TaskForm` — controlled forms used in both create and edit flows
+- `InfluencerForm` — exports `TRAITS` constant (10 traits); uses toggle pill buttons for multi-select traits
+
+**Seeding:** `prisma/seed.ts` — run `npm run seed` to populate 12 Saudi influencer records (clears existing influencers first)
 
 **Prisma client** is a singleton in `src/lib/db.ts` to avoid multiple instances in dev hot-reload.
 
