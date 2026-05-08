@@ -4,206 +4,208 @@ import { PrismaClient } from "../src/generated/prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
-  // Companies
-  const acme = await prisma.company.create({
-    data: {
-      name: "Acme Corp",
-      website: "https://acme.com",
-      industry: "Technology",
-      phone: "+1 (415) 555-0100",
-      address: "100 Market St, San Francisco, CA 94105",
+  await prisma.influencer.deleteMany();
+
+  const influencers = [
+    {
+      name: "Mohammed Al-Qahtani",
+      email: "m.qahtani@outlook.sa",
+      phone: "+966501112233",
+      location: "Saudi Arabia",
+      city: "Riyadh",
+      sex: "MALE" as const,
+      platform: "INSTAGRAM" as const,
+      handle: "@mohammedq.fit",
+      followers: 870000,
+      engagementRate: 4.3,
+      niche: "Fitness",
+      traits: "face,hook_master,speaking,storytelling",
+      ratePerPost: 18000,
+      status: "ACTIVE" as const,
     },
-  });
-
-  const nova = await prisma.company.create({
-    data: {
-      name: "Nova Solutions",
-      website: "https://novasolutions.io",
-      industry: "SaaS",
-      phone: "+1 (212) 555-0182",
-      address: "350 5th Ave, New York, NY 10118",
+    {
+      name: "Sara Al-Ghamdi",
+      email: "sara.ghamdi@gmail.com",
+      phone: "+966502223344",
+      location: "Saudi Arabia",
+      city: "Jeddah",
+      sex: "FEMALE" as const,
+      platform: "INSTAGRAM" as const,
+      handle: "@sara.fashion.sa",
+      followers: 1240000,
+      engagementRate: 5.7,
+      niche: "Fashion",
+      traits: "face,lifestyle,storytelling,trend_setter",
+      ratePerPost: 24000,
+      status: "ACTIVE" as const,
     },
-  });
-
-  const peak = await prisma.company.create({
-    data: {
-      name: "Peak Ventures",
-      website: "https://peakventures.vc",
-      industry: "Venture Capital",
-      phone: "+1 (650) 555-0143",
-      address: "3000 Sand Hill Rd, Menlo Park, CA 94025",
+    {
+      name: "Fahad Al-Otaibi",
+      email: "fahad.content@gmail.com",
+      phone: "+966503334455",
+      location: "Saudi Arabia",
+      city: "Riyadh",
+      sex: "MALE" as const,
+      platform: "TIKTOK" as const,
+      handle: "@fahadcomedy",
+      followers: 2350000,
+      engagementRate: 8.1,
+      niche: "Lifestyle",
+      traits: "face,comedy,hook_master,trend_setter",
+      ratePerPost: 35000,
+      status: "ACTIVE" as const,
     },
-  });
-
-  // Contacts
-  const jane = await prisma.contact.create({
-    data: {
-      name: "Jane Smith",
-      email: "jane.smith@acme.com",
-      phone: "+1 (415) 555-0121",
-      role: "CEO",
-      companyId: acme.id,
+    {
+      name: "Nora Al-Mutairi",
+      email: "nora.beauty@hotmail.com",
+      phone: "+966504445566",
+      location: "Saudi Arabia",
+      city: "Riyadh",
+      sex: "FEMALE" as const,
+      platform: "TIKTOK" as const,
+      handle: "@nora.beauty",
+      followers: 985000,
+      engagementRate: 6.4,
+      niche: "Beauty",
+      traits: "face,educational,review,ugc",
+      ratePerPost: 16000,
+      status: "ACTIVE" as const,
     },
-  });
-
-  const marcus = await prisma.contact.create({
-    data: {
-      name: "Marcus Lee",
-      email: "marcus@acme.com",
-      phone: "+1 (415) 555-0134",
-      role: "VP of Engineering",
-      companyId: acme.id,
+    {
+      name: "Abdullah Al-Zahrani",
+      email: "abd.tech@gmail.com",
+      phone: "+966505556677",
+      location: "Saudi Arabia",
+      city: "Dammam",
+      sex: "MALE" as const,
+      platform: "YOUTUBE" as const,
+      handle: "@abdtech.sa",
+      followers: 460000,
+      engagementRate: 3.9,
+      niche: "Tech",
+      traits: "speaking,educational,review,voiceover",
+      ratePerPost: 12000,
+      status: "ACTIVE" as const,
     },
-  });
-
-  const priya = await prisma.contact.create({
-    data: {
-      name: "Priya Patel",
-      email: "priya@novasolutions.io",
-      phone: "+1 (212) 555-0195",
-      role: "Head of Sales",
-      companyId: nova.id,
+    {
+      name: "Lujain Al-Omran",
+      email: "lujain.lifestyle@gmail.com",
+      phone: "+966506667788",
+      location: "Saudi Arabia",
+      city: "Jeddah",
+      sex: "FEMALE" as const,
+      platform: "INSTAGRAM" as const,
+      handle: "@lujain.life",
+      followers: 1820000,
+      engagementRate: 4.8,
+      niche: "Lifestyle",
+      traits: "face,storytelling,lifestyle,trend_setter",
+      ratePerPost: 30000,
+      status: "ACTIVE" as const,
     },
-  });
-
-  const tom = await prisma.contact.create({
-    data: {
-      name: "Tom Nguyen",
-      email: "tom.nguyen@novasolutions.io",
-      phone: "+1 (212) 555-0167",
-      role: "Product Manager",
-      companyId: nova.id,
+    {
+      name: "Ahmad Al-Shehri",
+      email: "ahmad.travel@gmail.com",
+      phone: "+966507778899",
+      location: "Saudi Arabia",
+      city: "Abha",
+      sex: "MALE" as const,
+      platform: "YOUTUBE" as const,
+      handle: "@ahmadexplores",
+      followers: 670000,
+      engagementRate: 5.2,
+      niche: "Travel",
+      traits: "face,storytelling,hook_master,speaking",
+      ratePerPost: 14000,
+      status: "ACTIVE" as const,
     },
-  });
-
-  const sara = await prisma.contact.create({
-    data: {
-      name: "Sara Kim",
-      email: "sara@peakventures.vc",
-      phone: "+1 (650) 555-0188",
-      role: "Partner",
-      companyId: peak.id,
+    {
+      name: "Reem Al-Dosari",
+      email: "reem.food@hotmail.com",
+      phone: "+966508889900",
+      location: "Saudi Arabia",
+      city: "Khobar",
+      sex: "FEMALE" as const,
+      platform: "TIKTOK" as const,
+      handle: "@reemcooks",
+      followers: 730000,
+      engagementRate: 7.3,
+      niche: "Food",
+      traits: "face,review,hook_master,ugc",
+      ratePerPost: 11000,
+      status: "ACTIVE" as const,
     },
-  });
-
-  const alex = await prisma.contact.create({
-    data: {
-      name: "Alex Rivera",
-      email: "alex.rivera@freelance.com",
-      phone: "+1 (303) 555-0109",
-      role: "Consultant",
-      companyId: null,
+    {
+      name: "Turki Al-Harbi",
+      email: "turki.motiv@gmail.com",
+      phone: "+966509990011",
+      location: "Saudi Arabia",
+      city: "Madinah",
+      sex: "MALE" as const,
+      platform: "INSTAGRAM" as const,
+      handle: "@turki.motivates",
+      followers: 540000,
+      engagementRate: 6.0,
+      niche: "Fitness",
+      traits: "speaking,hook_master,storytelling,educational",
+      ratePerPost: 9500,
+      status: "ACTIVE" as const,
     },
-  });
+    {
+      name: "Dina Al-Shihri",
+      email: "dina.fashion@gmail.com",
+      phone: "+966500011122",
+      location: "Saudi Arabia",
+      city: "Jeddah",
+      sex: "FEMALE" as const,
+      platform: "INSTAGRAM" as const,
+      handle: "@dina.closet",
+      followers: 1100000,
+      engagementRate: 4.6,
+      niche: "Fashion",
+      traits: "face,ugc,trend_setter,lifestyle",
+      ratePerPost: 20000,
+      status: "ACTIVE" as const,
+    },
+    {
+      name: "Khalid Al-Rashidi",
+      email: "khalid.gaming@gmail.com",
+      phone: "+966500122233",
+      location: "Saudi Arabia",
+      city: "Riyadh",
+      sex: "MALE" as const,
+      platform: "YOUTUBE" as const,
+      handle: "@khalidgames",
+      followers: 920000,
+      engagementRate: 5.5,
+      niche: "Gaming",
+      traits: "voiceover,comedy,hook_master,educational",
+      ratePerPost: 13500,
+      status: "ACTIVE" as const,
+    },
+    {
+      name: "Maha Al-Qahtani",
+      email: "maha.wellness@hotmail.com",
+      phone: "+966500233344",
+      location: "Saudi Arabia",
+      city: "Taif",
+      sex: "FEMALE" as const,
+      platform: "INSTAGRAM" as const,
+      handle: "@maha.wellness",
+      followers: 310000,
+      engagementRate: 7.8,
+      niche: "Fitness",
+      traits: "face,educational,storytelling,speaking",
+      ratePerPost: 7000,
+      status: "INACTIVE" as const,
+    },
+  ];
 
-  // Tasks
-  await prisma.task.createMany({
-    data: [
-      {
-        title: "Send contract to Acme Corp",
-        description: "Follow up on the Q3 SLA renewal — legal reviewed it last week.",
-        status: "OPEN",
-        priority: "HIGH",
-        dueDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000), // 2 days from now
-        contactId: jane.id,
-        companyId: acme.id,
-      },
-      {
-        title: "Schedule product demo with Nova Solutions",
-        description: "Priya requested a live demo of the new dashboard features.",
-        status: "IN_PROGRESS",
-        priority: "HIGH",
-        dueDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
-        contactId: priya.id,
-        companyId: nova.id,
-      },
-      {
-        title: "Review Peak Ventures pitch deck",
-        description: "Sara sent over their updated deck. Need feedback before Thursday.",
-        status: "OPEN",
-        priority: "MEDIUM",
-        dueDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-        contactId: sara.id,
-        companyId: peak.id,
-      },
-      {
-        title: "Onboarding call with Marcus",
-        description: "Walk through API docs and integration checklist.",
-        status: "DONE",
-        priority: "MEDIUM",
-        dueDate: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), // past
-        contactId: marcus.id,
-        companyId: acme.id,
-      },
-      {
-        title: "Send invoice to Alex Rivera",
-        status: "OPEN",
-        priority: "HIGH",
-        dueDate: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000), // overdue
-        contactId: alex.id,
-        companyId: null,
-      },
-      {
-        title: "Update CRM with Nova Solutions Q2 deal value",
-        status: "IN_PROGRESS",
-        priority: "LOW",
-        dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-        contactId: tom.id,
-        companyId: nova.id,
-      },
-      {
-        title: "Follow up on unanswered email — Sara Kim",
-        status: "OPEN",
-        priority: "MEDIUM",
-        dueDate: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
-        contactId: sara.id,
-        companyId: peak.id,
-      },
-    ],
-  });
+  for (const data of influencers) {
+    await prisma.influencer.create({ data });
+  }
 
-  // Notes
-  await prisma.note.createMany({
-    data: [
-      {
-        content: "Met Jane at SaaStr. Very interested in the enterprise tier. Mentioned they're evaluating two other vendors.",
-        contactId: jane.id,
-        companyId: acme.id,
-      },
-      {
-        content: "Called re: contract delay. Legal team is backed up — expect signature by end of week.",
-        contactId: jane.id,
-        companyId: acme.id,
-      },
-      {
-        content: "Marcus prefers async communication. Ping on Slack before scheduling anything.",
-        contactId: marcus.id,
-        companyId: null,
-      },
-      {
-        content: "Priya confirmed $120k ARR budget. Decision by end of Q2.",
-        contactId: priya.id,
-        companyId: nova.id,
-      },
-      {
-        content: "Nova Solutions has 3 internal champions — Priya, Tom, and the CTO (haven't met yet).",
-        contactId: null,
-        companyId: nova.id,
-      },
-      {
-        content: "Sara introduced us to two portfolio companies that might be a fit. Will follow up separately.",
-        contactId: sara.id,
-        companyId: peak.id,
-      },
-      {
-        content: "Alex is between contracts — good candidate for a referral arrangement.",
-        contactId: alex.id,
-        companyId: null,
-      },
-    ],
-  });
-
-  console.log("Seed complete.");
+  console.log(`Seeded ${influencers.length} Saudi influencers.`);
 }
 
 main()

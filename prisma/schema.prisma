@@ -77,3 +77,44 @@ enum Priority {
   MEDIUM
   HIGH
 }
+
+model Influencer {
+  id             String           @id @default(cuid())
+  name           String
+  email          String?
+  phone          String?
+  phone2         String?
+  location       String?
+  city           String?
+  sex            Sex?
+  platform       Platform         @default(INSTAGRAM)
+  handle         String?
+  followers      Int?
+  engagementRate Float?
+  niche          String?
+  traits         String?
+  ratePerPost    Float?
+  status         InfluencerStatus @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+}
+
+enum Sex {
+  MALE
+  FEMALE
+}
+
+enum Platform {
+  INSTAGRAM
+  TIKTOK
+  YOUTUBE
+  TWITTER
+  FACEBOOK
+  OTHER
+}
+
+enum InfluencerStatus {
+  ACTIVE
+  INACTIVE
+  BLACKLISTED
+}
